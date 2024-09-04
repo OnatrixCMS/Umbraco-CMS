@@ -12,9 +12,10 @@
     var sectionBackgroundColorLabel = Model?.Content.Value<PickedColor>("sectionBackgroundColor")?.Label.ToLower() ?? "";
     var backgroundColorClass = !string.IsNullOrEmpty(sectionBackgroundColorLabel) && sectionBackgroundColorLabel != "none" ? $"bg-{sectionBackgroundColorLabel}" : "";
     var sectionBackgroundImage = Model?.Content.Value<IPublishedContent>("sectionBackgroundImage")?.Url() ?? "";
+    var backgroundImageClass = !string.IsNullOrEmpty(sectionBackgroundImage) ? "background-image-absolute" : "";
 }
 
-<section id="@sectionId" class="@spacingTopClass @spacingBottomClass">
+<section id="@sectionId" class="@spacingTopClass @spacingBottomClass @backgroundColorClass">
     @if (!string.IsNullOrEmpty(backgroundColorClass))
     {
         <div class="background @backgroundColorClass"></div>
@@ -22,8 +23,8 @@
     <div class="container @centerContentClass">
         @if (!string.IsNullOrEmpty(sectionBackgroundImage))
         {
-            <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+            <img class="background-image @backgroundImageClass" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
         }
-        @await Html.GetBlockGridItemAreasHtmlAsync(Model);
+        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
     </div>
 </section>
