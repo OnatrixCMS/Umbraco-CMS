@@ -13,6 +13,8 @@
     var siteFavicon = settings?.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("siteFavicon")?.Url();
 
     var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.Title} | {siteName} - {siteTagline}" : $"{siteName} - {siteTagline}";
+
+    var currentPage = Umbraco.AssignedContentItem;
 }
 
 <!DOCTYPE html>
@@ -29,6 +31,12 @@
         }
 </head>
 <body>
+    @if(currentPage.Level > 1)
+    {
+        @await Html.PartialAsync("partials/Navigation.cshtml")
+    }
+
+
     <div class="wrapper">
         @await Html.PartialAsync("partials/static/topbar.cshtml")
         @await Html.PartialAsync("partials/static/header.cshtml")

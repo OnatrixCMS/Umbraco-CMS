@@ -494,19 +494,75 @@ footer .container .copyright a {
 }
 
 /* Här börjar About-us */
-#about-us {
-
+#about-home .container {
+  position: relative;
 }
 
-#about-us .container h2 {
+#about-home .container .call-back-form {
+  margin-top: 40px;
+  box-shadow: 0 4px 10px 10px rgba(0, 0, 0, 0.1);
+  max-height: 600px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 4;
+}
+@media (min-width: 1650px) {
+  #about-home .container .call-back-form {
+    position: absolute;
+    top: -225px;
+    right: 40px;
+  }
+}
+#about-home .container .call-back-form .form-header {
+  padding: 5px 15px;
+}
+#about-home .container .call-back-form .form-content {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  gap: 10px;
+  padding: 15px 10px;
+}
+#about-home .container .call-back-form .form-content .form-ingress {
+  padding: 0 10px;
+}
+#about-home .container .call-back-form .form-content input {
+  margin: 8px 5px;
+  padding: 15px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+}
+#about-home .container .call-back-form .form-content input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+#about-home .container .call-back-form .form-content select {
+  margin: 10px 5px;
+  padding: 15px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: var(--color-default);
+  outline: none;
+}
+#about-home .container .call-back-form .form-content button {
+  margin-top: 10px;
+}
+
+ h2 {
   margin: 0;
   margin-bottom: 20px;
 }
 
-#about-us .container h6 {
+h6 {
   margin: 0;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 /*Här börjar services*/
@@ -516,7 +572,7 @@ footer .container .copyright a {
 
 /*Här börjar our-story*/
 #our-story .container {
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -577,6 +633,106 @@ footer .container .copyright a {
   max-width: 100%;
   position: relative;
   top: 80px;
+  z-index: 4;
+}
+
+
+/* Project Card */
+.project-card {
+  position: relative;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .project-card {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 1024px){
+  #our-projects .umb-block-grid__layout-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+}
+
+.project-card img {
+  width: 700px;
+  max-width: 100%;
+}
+.project-card .card-footer {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+.project-card .card-footer h5, 
+.project-card .card-footer p {
+  color: var(--color-light);
+  margin: 0;
+}
+.project-card .card-footer::after {
+  position: absolute;
+  content: ">";
+  top: 5px;
+  right: 15px;
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: opacity 0.3s ease;
+  padding-right: 10px;
+}
+.project-card .card-footer:hover {
+  height: 100px;
+  background-color: var(--color-primary);
+  padding-top: 26px;
+}
+.project-card .card-footer:hover h5 {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+.project-card .card-footer:hover::after {
+  opacity: 1;
+}
+
+#our-projects img {
+  width: 100%;
+  display: block; 
+  align-self: center;
+}
+
+/* Här börjar partners */
+@media (max-width: 1024px) {
+  #partners .umb-block-grid__layout-container{
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+}
+
+/* Här börjar about sidan */
+
+/*  (globe-left) */
+@media (max-width: 1690px){
+  #section-bar img {
+    display: none;
+  }
+}
+
+#section-bar .umb-block-grid__layout-container > .umb-block-grid__layout-item[data-element-udi="umb://element/f85a36d2ed7746938641e19b5325958d"] img {
+    position: absolute;
+    top: 0; 
+    right: 280px;
+}
+
+/* (globe-right) */
+#section-bar .umb-block-grid__layout-container > .umb-block-grid__layout-item[data-element-udi="umb://element/acfbd15fe3a3446bb169ab360dc979f7"] img {
+    position: absolute;
+    bottom: 0; 
+    left: 0;
 }
 
 /* Här börjar theme */

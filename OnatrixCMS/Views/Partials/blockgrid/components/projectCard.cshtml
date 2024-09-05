@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+    var projectCategory = Model?.Content.Value<string>("projectCategory");
+    var projectHeadline = Model?.Content.Value<string>("projectHeadline");
+    var projectUrl = Model?.Content.Value<string>("projectUrl");
+    var projectImg = Model?.Content.Value<IPublishedContent>("projectImg")?.Url() ?? null;
+}
+
+<div class="project-card ">
+    <img src="@projectImg" alt=""/>
+    <a href="@projectUrl" class="card-footer"">
+        <h5>@projectHeadline</h5>
+        <p>@projectCategory</p>
+    </a>
+</div>

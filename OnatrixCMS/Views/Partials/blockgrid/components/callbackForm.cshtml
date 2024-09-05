@@ -1,0 +1,22 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+ <form class="call-back-form">
+    <div class="form-header bg-primary">
+        <h3>Request a call back</h3>
+    </div>
+    <div class="form-content">
+        <p class="form-ingress">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat</p>
+        <input placeholder="Name"/>
+        <input placeholder="Email Address"/>
+        <input placeholder="Phone"/>
+        <select>
+            <option value="" disabled selected>Choose an option</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+        <button class="btn-accent">Submit</button>
+    </div>
+</form>

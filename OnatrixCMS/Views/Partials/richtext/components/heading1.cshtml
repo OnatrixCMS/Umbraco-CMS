@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem<MyBlockType, MyBlockSettingsType>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@* Output the Heading of field with alias 'heading' from the 'MyBlockType' Content Model *@
+<h1 style="background-color:@Model.Settings.BackgroundColor">@Model.Content.Heading</h1>
+
+@{
+    var headlineContent = Model?.Content.Value<string>("headlineContent");
+}
+
+@if (!string.IsNullOrEmpty(headlineContent)) 
+{
+    <h1>@headlineContent</h1>
+}
