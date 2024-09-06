@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+ 
+@{
+    var staffImage = Model?.Content.Value<IPublishedContent>("staffImage")?.Url() ?? null;
+    var staffName = Model?.Content.Value<string>("staffName") ?? null;
+    var staffTitle = Model?.Content.Value<string>("staffTitle") ?? null;
+}
+<div class="staff-card">
+    <img src="@staffImage"/>
+    <p class="team-member-name">@staffName</p>
+    <p class="team-member-position">@staffTitle</p>
+</div>

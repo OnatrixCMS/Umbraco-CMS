@@ -1,0 +1,50 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedUrlProvider PublishedUrlProvider
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var globeLeft = settings?.Value<IPublishedContent>("breadCrumbsImage1")?.Url() ?? "";
+    var globeRight = settings?.Value<IPublishedContent>("breadCrumbsImage2")?.Url() ?? "";
+}
+
+
+
+<section class="bg-gray" id="about-us">
+    <div class="section-title-area">
+        <img class="globeLeft" src="@globeLeft" alt="Globe Left" />
+        <div class="section-title">
+            <h2>@Model.Name</h2>
+            <div class="section-nav">
+                @* Breadcrumb navigation *@
+                @{
+                    var selection = Model.Ancestors().ToArray();
+                    var totalItems = selection.Length;
+                }
+
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        @if (totalItems > 0)
+                        {
+                            @for (int i = 0; i < totalItems; i++)
+                            {
+                                <li class="breadcrumb-item">
+                                    <a href="@selection[i].Url(PublishedUrlProvider)">@selection[i].Name</a>
+                                    @if (i <= totalItems - 1) { <span class="divider">&gt;</span> }
+                                </li>
+                            }
+                        }
+                        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <img class="globeRight" src="@globeRight" alt="Globe Right" />
+    </div>
+</section>

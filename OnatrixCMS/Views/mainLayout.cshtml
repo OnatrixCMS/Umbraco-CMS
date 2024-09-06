@@ -31,18 +31,22 @@
         }
 </head>
 <body>
-    @if(currentPage.Level > 1)
-    {
-        @await Html.PartialAsync("partials/Navigation.cshtml")
-    }
 
 
     <div class="wrapper">
         @await Html.PartialAsync("partials/static/topbar.cshtml")
         @await Html.PartialAsync("partials/static/header.cshtml")
+        @if(currentPage.Level > 1)
+        {
+            @await Html.PartialAsync("partials/Breadcrumbs.cshtml")
+        }
         <main>
             @RenderBody()
         </main>
+        @if(currentPage.Level > 1)
+        {
+           @await Html.PartialAsync("partials/static/contactInformation.cshtml") 
+        }
         @await Html.PartialAsync("partials/static/footer.cshtml")
     </div>
     <script src="/scripts/main.js"></script>
