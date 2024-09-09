@@ -1,11 +1,19 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
 @{
-    var rootContents = UmbracoHelper.ContentAtRoot();
-    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
-    var siteName = settings?.Value<string>("siteName") ?? null;
-    var siteLogoType = settings?.Value<IPublishedContent>("siteLogoType")?.Url() ?? "";
+   var rootContents = UmbracoHelper.ContentAtRoot();
+   var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+   var siteName = settings?.Value<string>("siteName") ?? null;
+   var siteLogoType = settings?.Value<IPublishedContent>("siteLogoType")?.Url() ?? "";
+   var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray(); 
 }
 
 <header>
@@ -15,10 +23,13 @@
                 <a href="/"><img src="@siteLogoType" alt="@siteName" /></a>
             </div>
             <nav class="nav-bar">
-                <a href="/about" class="nav-link">About</a>
-                <a href="/services" class="nav-link">Services</a>
-                <a href="/projects" class="nav-link">Projects</a>
-                <a href="/contact" class="nav-link">Contact</a>
+            @if (selection?.Length > 0)
+            {
+                @foreach (var item in selection)
+                {
+                   <a class="@(item.IsAncestorOrSelf(Model) ? "nav-link active" : "nav-link")" href="@item.Url(PublishedUrlProvider)" title="@item.Name">@item.Name</a>
+                }
+            }
             </nav>
             <div class="magnifying-glass">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -26,3 +37,6 @@
         </div> 
     </div>
 </header>
+
+
+

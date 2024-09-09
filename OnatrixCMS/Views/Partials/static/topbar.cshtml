@@ -11,16 +11,6 @@
 <div id="topbar" class="bg-primary">
     <div class="container">
         <div class="address">@officeLocation</div> 
-        <div class="social-icons">
-            <a href="https://www.facebook.com/yourprofile" target="_blank" aria-label="Facebook">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
-        </div>
+       @await Html.PartialAsync("socialmedia.cshtml")
     </div>
 </div>

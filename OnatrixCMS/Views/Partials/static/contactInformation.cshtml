@@ -13,9 +13,12 @@
     var officeLocation = settings?.Value<string>("officeLocation") ?? "";
     var officePhoneNumber = settings?.Value<string>("officePhoneNumber") ?? "";
     var officeEmailAddress = settings?.Value<string>("officeEmailAddress") ?? "";
+
+    var currentPage = Umbraco.AssignedContentItem;
+    bool isContactPage = currentPage.Name == "Contact";
 }
 
- <section class="let-us-footer bg-gray">
+<section class="let-us-footer @(isContactPage ? "bg-light" : "bg-gray")">
         <div class="let-us-know container">
             <div class="contact-portrait">
                 <img class="dots" src="@contactBackgroundImage1"/>

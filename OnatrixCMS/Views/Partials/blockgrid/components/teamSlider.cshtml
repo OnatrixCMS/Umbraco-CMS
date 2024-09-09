@@ -1,0 +1,26 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var teamSlides = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("teamSlides");
+}
+
+@if (teamSlides != null)
+{
+    @foreach (var item in teamSlides)
+    {
+        var staffImage = item?.Content.Value<IPublishedContent>("staffImage")?.Url();
+        var staffName = item?.Content.Value<string>("staffName") ?? "";
+        var staffRole = item?.Content.Value<string>("staffRole") ?? "";
+        var staffImageDescription = item?.Content.Value<string>("staffImageDescription") ?? string.Empty;
+
+        <div class="staff-card">
+            <img src="@staffImage" alt="staffImageDescription" />
+            <p class="team-member-name">@staffName</p>
+            <p class="team-member-position">@staffRole</p>
+        </div>
+
+    }
+}
+
+

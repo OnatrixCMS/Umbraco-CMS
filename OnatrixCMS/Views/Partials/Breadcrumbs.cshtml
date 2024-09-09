@@ -12,36 +12,38 @@
 
     var globeLeft = settings?.Value<IPublishedContent>("breadCrumbsImage1")?.Url() ?? "";
     var globeRight = settings?.Value<IPublishedContent>("breadCrumbsImage2")?.Url() ?? "";
+    var currentPage = Umbraco.AssignedContentItem;
+    var selection = Model.Ancestors().ToArray();
+    var homePageDisplayName = "Home";
+    var isFirstItem = true;
 }
-
-
 
 <section class="bg-gray" id="about-us">
     <div class="section-title-area">
         <img class="globeLeft" src="@globeLeft" alt="Globe Left" />
         <div class="section-title">
-            <h2>@Model.Name</h2>
+            <h2>@ViewBag.Title</h2>
             <div class="section-nav">
                 @* Breadcrumb navigation *@
-                @{
-                    var selection = Model.Ancestors().ToArray();
-                    var totalItems = selection.Length;
-                }
-
                 <nav aria-label="breadcrumb">
-                    <ul class="breadcrumb">
-                        @if (totalItems > 0)
+
+                        @if (selection?.Length > 0)
                         {
-                            @for (int i = 0; i < totalItems; i++)
+                    <ul class="breadcrumb">
+                            @foreach(var item in selection.OrderBy(x => x.Level))
                             {
+                                var displayName = isFirstItem ? homePageDisplayName : item.Name;
                                 <li class="breadcrumb-item">
-                                    <a href="@selection[i].Url(PublishedUrlProvider)">@selection[i].Name</a>
-                                    @if (i <= totalItems - 1) { <span class="divider">&gt;</span> }
+                                    <a href="@item.Url(PublishedUrlProvider)">@displayName</a>
+                                    
+                                        <span class="divider">&gt;</span>
+                                    
                                 </li>
+                                isFirstItem = false;
                             }
-                        }
-                        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+                        <li class="active">@Model.Name</li>
                     </ul>
+                        }
                 </nav>
             </div>
         </div>

@@ -1,0 +1,100 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+    var currentPage = Umbraco.AssignedContentItem;
+}
+
+
+
+ <section class="projects container">
+        <div class="main-container">
+            <div class="projects-list">
+                <div class="projects-box">
+                    <img src="/images/projects-1.svg"/>
+                    <div class="projects-info">
+                        <h4>Annual Report for Juva Inc.</h4>
+                        <div class="date">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <p class="date-text">June 15, 2024</p>
+                        </div>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error.</p>
+                        <div class="read-more-link">
+                            <a>Read more</a>
+                            <i class="fa-regular fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-box">
+                    <img src="/images/projects-1.svg"/>
+                    <div class="projects-info">
+                        <h4>Annual Report for Juva Inc.</h4>
+                        <div class="date">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <p class="date-text">June 15, 2024</p>
+                        </div>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error.</p>
+                        <div class="read-more-link">
+                            <a>Read more</a>
+                            <i class="fa-regular fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-box">
+                    <img src="/images/projects-1.svg"/>
+                    <div class="projects-info">
+                        <h4>Annual Report for Juva Inc.</h4>
+                        <div class="date">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <p class="date-text">June 15, 2024</p>
+                        </div>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error.</p>
+                        <div class="read-more-link">
+                            <a>Read more</a>
+                            <i class="fa-regular fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-box">
+                    <img src="/images/projects-1.svg"/>
+                    <div class="projects-info">
+                        <h4>Annual Report for Juva Inc.</h4>
+                        <div class="date">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <p class="date-text">June 15, 2024</p>
+                        </div>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Sed ut perspiciatis unde omnis iste natus error.</p>
+                        <div class="read-more-link">
+                            <a>Read more</a>
+                            <i class="fa-regular fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-section">
+                <h4>Tags</h4>
+                <div class="tags">
+                    <p class="tag">Report</p>
+                    <p class="tag">Business plans</p>
+                    <p class="tag">Insights</p>
+                    <p class="tag">Business</p>
+                    <p class="tag">App</p>
+                    <p class="tag">Project</p>
+                    <p class="tag">Finance</p>
+                    <p class="tag">Pricing</p>
+                </div>
+                <div class="about-footer bg-primary">
+                    <h4>How can we help you?</h4>
+                    <p>Online support 24/7, we are here to help you</p>
+                    <div class="input-container">
+                        <input type="email" placeholder="E-mail address">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <img class="mail-img" src="./images/about-us-mail.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>

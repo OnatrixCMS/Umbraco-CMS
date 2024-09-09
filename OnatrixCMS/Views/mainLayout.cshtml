@@ -4,7 +4,7 @@
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 
 @{
-	Layout = null;
+    Layout = null;
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
     var siteName = settings?.Value<string>("siteName") ?? "Onatrix";
@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
     <title>@pageTitle</title>
-      @if (!string.IsNullOrEmpty(siteFavicon))
-        {
-            <link rel="icon" type="image/webp" href="@siteFavicon">
-        }
+    @if (!string.IsNullOrEmpty(siteFavicon))
+    {
+        <link rel="icon" type="image/webp" href="@siteFavicon">
+    }
 </head>
 <body>
 
@@ -36,17 +36,27 @@
     <div class="wrapper">
         @await Html.PartialAsync("partials/static/topbar.cshtml")
         @await Html.PartialAsync("partials/static/header.cshtml")
-        @if(currentPage.Level > 1)
+
+        @if (!string.IsNullOrEmpty(ViewBag.Title) && currentPage.Name != "Contact" && currentPage.Level > 1)
         {
             @await Html.PartialAsync("partials/Breadcrumbs.cshtml")
         }
+
+        @if (currentPage.Name == "Contact")
+        {
+            @await Html.PartialAsync("partials/Breadcrumbs.cshtml")
+            @await Html.PartialAsync("partials/static/contactInformation.cshtml")
+        }
+
         <main>
             @RenderBody()
         </main>
-        @if(currentPage.Level > 1)
+
+        @if (currentPage.Level > 1 && currentPage.Name != "Contact")
         {
-           @await Html.PartialAsync("partials/static/contactInformation.cshtml") 
+            @await Html.PartialAsync("partials/static/contactInformation.cshtml")
         }
+
         @await Html.PartialAsync("partials/static/footer.cshtml")
     </div>
     <script src="/scripts/main.js"></script>
