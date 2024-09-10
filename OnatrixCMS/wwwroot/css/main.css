@@ -109,6 +109,11 @@ span {
   font-weight: 600;
 }
 
+p {
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
 .bg-secondary span {
   color: var(--color-primary);
 }
@@ -638,11 +643,12 @@ section {
 /* About us Main Content*/
 #main-content .umb-block-grid__layout-item{
   display: flex;
-  justify-content: center;
 }
 
-#main-content img {
-  max-width: 100%;
+#main-content .umb-block-grid__layout-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #main-content span{
@@ -770,7 +776,7 @@ h6 {
 
 /*Här börjar services*/
 .services {
-    padding-top: 85px;
+    padding-top: 80px;
     padding-bottom: 60px;
 }
 
@@ -947,61 +953,26 @@ h6 {
     margin-bottom: 1.4rem;
 }
 
-.services-details .container .top-container .about-us .about-footer {
-    padding: 10px 20px;
-    position: relative;
-}
-
-.services-details .container .top-container .about-us .about-footer h4 {
-    color: var(--color-accent);
-}
-
-.services-details .container .top-container .about-us .about-footer .input-container {
-    position: relative;
-}
-
-.services-details .container .top-container .about-us .about-footer .input-container input {
-    margin: 8px 0;
-    padding: 15px 15px;
-    font-size: 1rem;
-    border: 1px solid #ececec;
-    border-radius: 4px;
-    outline: none;
-    z-index: 1;
-    width: 100%;
-}
-
-.services-details .container .top-container .about-us .about-footer .input-container input:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 5px rgba(66, 73, 70, 0.7);
-}
-
-.services-details .container .top-container .about-us .about-footer .input-container i {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: var(--color-primary);
-    font-size: 1.6rem;
-}
-
-.services-details .container .top-container .about-us .about-footer .mail-img {
-    position: absolute;
-    bottom: -22px;
-    right: 0;
-}
-
 .about-footer {
+  margin-top: 35px;
   padding: 10px 20px;
   position: relative;
+  border-radius: 4px;
+}
+
+.about-footer p {
+  padding-right: 30px;
+  margin-bottom: 20px;
 }
 .about-footer h4 {
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
+  margin-bottom: 15px !important;
 }
 .about-footer .input-container {
   position: relative;
 }
 .about-footer .input-container input {
-  margin: 8px 0;
+  margin: 14px 0 20px 0;
   padding: 15px 15px;
   font-size: 1rem;
   border: 1px solid #ececec;
@@ -1016,18 +987,18 @@ h6 {
 }
 .about-footer .input-container i {
   position: absolute;
-  top: 20px;
-  right: 35px;
+  top: 25px;
+  right: 18px;
   color: var(--color-primary);
   font-size: 1.6rem;
 }
 .about-footer .mail-img {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
 }
 
-@media (min-width: 768px) { /* Antagande för small-desktop media query */
+@media (min-width: 768px) { 
     .services-details .container .top-container .main-content {
         border-left: 2px solid #ececec;
         padding-left: 30px;
@@ -1186,12 +1157,17 @@ h6 {
 
 
 /* Project Card */
-.project-card {
+.project-wrapper {
+  display: flex;
+
+}
+
+.project-wrapper .project-card {
   position: relative;
   width: 100%;
 }
 @media (min-width: 768px) {
-  .project-card {
+.project-wrapper .project-card {
     margin-bottom: 0;
   }
 }
@@ -1204,42 +1180,43 @@ h6 {
   }
 }
 
-.project-card img {
+.project-wrapper .project-card img {
   width: 700px;
   max-width: 100%;
 }
-.project-card .card-footer {
+.project-wrapper .project-card .card-footer {
   display: block;
   position: absolute;
   bottom: 0;
   width: 100%;
+  height: 93px;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
+  padding: 26px 16px 5px 16px;
   transition: height 0.3s ease, background-color 0.3s ease;
 }
 .project-card .card-footer h5, 
 .project-card .card-footer p {
-  color: var(--color-light);
-  margin: 0;
+  color: var(--color-light) !important;
+  margin: 0 !important;
 }
 .project-card .card-footer::after {
   position: absolute;
   content: ">";
-  top: 5px;
+  top: 28px;
   right: 15px;
   font-size: 4rem;
-  color: var(--color-accent);
+  color: var(--color-light);
   opacity: 0;
   transform: opacity 0.3s ease;
   padding-right: 10px;
 }
 .project-card .card-footer:hover {
-  height: 100px;
+  height: 130px;
   background-color: var(--color-primary);
-  padding-top: 26px;
+  padding-top: 46px;
 }
 .project-card .card-footer:hover h5 {
-  color: var(--color-accent);
+  color: var(--color-secondary) !important;
   font-weight: 800;
 }
 .project-card .card-footer:hover::after {
@@ -1268,26 +1245,103 @@ h6 {
 
 .projects {
   padding-top: 120px;
+  padding-bottom: 90px;
 }
-
-main .projects-details .details-page {
-    padding-top: 90px;
-    padding-bottom: 90px;
-    display: grid;
-    grid-template-columns: 65% 35%;
-    gap: 40px;
-}
-
-.projects-details .details-page .details-main {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-}
-
 @media (min-width: 1200px) {
   .projects .main-container {
     display: flex;
+    justify-content: space-between;
   }
+}
+
+.projects-box {
+  text-align: center;
+  border-bottom: 1px solid #ECECEC;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.projects div:first-of-type{
+  padding-top: 0px;
+}
+
+.projects .projects-box:last-of-type{
+  border: none;
+}
+
+.projects .pagination{
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .projects-box {
+    display: flex;
+    text-align: left;
+  }
+}
+.projects-box .projects-info {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  word-break: break-all;
+}
+.projects-box .projects-info h4 {
+  margin: 0px;
+}
+
+.projects-box .projects-info p {
+  font-size: 14px;
+  color: var(--color-default);
+}
+.projects-box .projects-info .date {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #9C9EA6 ;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  .projects-box .projects-info .date {
+    justify-content: flex-start;
+  }
+}
+.projects-box .projects-info .date i {
+  margin-top: 5px;
+}
+.projects-box .projects-info .read-more-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+@media (min-width: 768px) {
+  .projects-box .projects-info .read-more-link {
+    justify-content: flex-start;
+  }
+}
+.projects-box .projects-info .read-more-link i {
+  color: var(--color-secondary);
+  margin-left: 10px;
+}
+.projects-box .projects-info .read-more-link a {
+  color: var(--color-default);
+  font-weight: 600;
+}
+
+@media (min-width: 1200px) {
+  .side-section {
+    margin-left: 25px;
+    padding-left: 25px;
+    border-left: 2px solid #ECECEC;
+  }
+}
+
+.side-section .tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 50px;
 }
 
 .projects-details .projects-box {
@@ -1349,11 +1403,6 @@ main .projects-details .details-page {
   font-weight: 600;
 }
 
-
-/* .projects-details  .side-section {
-    max-width: 35%;
-    margin-left: 50px;
-  } */
 .side-section h4 {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -1374,12 +1423,23 @@ main .projects-details .details-page {
 }
 
 .projects-details {
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 .projects-details .details-page {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1200px){
+  .projects-details .details-page {
+    display: grid;
+    grid-template-columns: 65% auto;
+  }
 }
 .projects-details .details-page .details-main {
-  border-right: 2px solid #ECECEC;
   padding-right: 50px;
+  margin-right: 0;
 }
 .projects-details .details-page .details-main .top-page-date {
   display: flex;

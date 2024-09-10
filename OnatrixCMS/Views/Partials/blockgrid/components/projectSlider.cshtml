@@ -1,0 +1,29 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+@{
+    var selection = Umbraco.Content(Guid.Parse("68afe901-8b86-4ac6-a6ab-df5bfaecb952"))
+    .ChildrenOfType("projectItem")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate)
+    .Take(4);
+}
+
+<div class="project-wrapper">
+    @foreach (var item in selection)
+    {
+        var image = item?.Value<IPublishedContent>("sliderImage")?.Url() ?? "";
+        var services = item?.Value<string>("services") ?? "";
+
+        <div class="project-card">
+            <img src="@image" alt="@item.Name" />
+            <a href="@item.Url()" class="card-footer">
+                <h5>@item.Name</h5>
+                <p>@(@services ?? "")</p>
+            </a>
+        </div>
+    }
+
+</div>

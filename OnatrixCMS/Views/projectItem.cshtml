@@ -32,12 +32,12 @@
                 <h4>Recent Projects</h4>
                 @foreach (var item in selection)
                 {
-                    var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                    var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
                     var pageTitle = item?.Value<string>("pageTitle") ?? "";
                     var sidepublishedOn = item?.Value<DateTime>("publishedOn").ToString("yyyy-MM-dd");
 
                     <a href="@item.Url()" class="projects-box">
-                        <img src="@image"/>
+                        <img src="@thumbnailImage"/>
                         <div class="projects-info">
                             <p style="color: var(--color-primary)">@item.Name()</p>
                             <div class="date">
@@ -49,16 +49,17 @@
                 }
                
                 <h4>Tags</h4>
-                @foreach (var item in selection)
-                {
-                    var categories = item?.Value<IEnumerable<string>>("categories") ?? null;
-                    <div class="tags">
+                <div class="tags">
+                    @foreach (var item in selection)
+                    {
+                        var categories = item?.Value<IEnumerable<string>>("categories") ?? null;
                         @foreach (var category in categories)
                         {
                             <p class="tag">@category</p>
                         }
-                    </div>
-                }
+                    }
+                </div>
+
                 <div class="about-footer bg-primary">
                     <h4>How can we help you?</h4>
                     <p>Online support 24/7, we are here to help you</p>
