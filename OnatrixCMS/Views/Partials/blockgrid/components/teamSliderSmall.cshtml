@@ -2,13 +2,13 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-    var teamSlides = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("teamSlides");
+    var smallSlider = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("smallSlider");
 }
 
-@if (teamSlides != null)
+@if (smallSlider != null)
 {
-    <div class="big-slider">
-        @foreach (var item in teamSlides)
+    <div class="small-slider">
+        @foreach (var item in smallSlider)
         {
             var staffImage = item?.Content.Value<IPublishedContent>("staffImage")?.Url();
             var staffName = item?.Content.Value<string>("staffName") ?? "";
@@ -23,5 +23,3 @@
         }
     </div>
 }
-
-

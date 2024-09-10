@@ -1,4 +1,7 @@
-﻿@using Umbraco.Cms.Core.Models;
+﻿
+
+
+@using Umbraco.Cms.Core.Models;
 @using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
@@ -7,75 +10,64 @@
 @{
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+    var publishedOn = Model?.Value<DateTime>("publishedOn").ToString("yyyy-MM-dd");
+    var selection = Umbraco.Content(Guid.Parse("68afe901-8b86-4ac6-a6ab-df5bfaecb952"))
+    .ChildrenOfType("projectItem")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate)
+    .Take(4);
 }
 
-<section class="services-details bg-light" id="details">
-            <div class="container">
-                <div class="top-container">
-                    <div class="about-us">
-                        <h4>About us</h4>
-                        <img src="" alt="staff meeting">
-                        <p class="ingress"> </p>
-                        <div class="about-footer bg-primary">
-                            <h4>How can we help you?</h4>
-                            <p>Online support 24/7, we are here to help you</p>
-                            <div class="input-container">
-                                <input type="email" placeholder="E-mail address">
-                                <i class="fa-regular fa-envelope"></i>
-                            </div>
-                            <img class="mail-img" src="./images/about-us-mail.svg" alt="">
-                        </div>
-                    </div>
-                    
-                    <div class="main-content">
-                        <img src="./images/card-1.svg" alt="staff cheering">
-                        <h4>key point</h4>
-                        
-                        <ul class="colored-bullet">
-                            <li>Financial planning is the process of helping clients meet their financial needs today and reach their dreams and goals tomorrow.</li>
-                            <li>Pellentesque fringilla augue quis dolor dapibus semper eget non nibh. Ut lobortis, nulla sed euismod posuere, quam magna scelerisque lectus, auctor iaculis quam ligula nec augue</li>
-                            <li>In hac habitasse platea dictumst. Aliquam felis ante, tincidunt sed magna auctor, aliquet dapibus turpis.</li>
-                        </ul>
-                        
-                        <h4>A financial plan is based on a personal relationship</h4>
-                        <p>No matter where you find yourself today or see yourself in the future, a financial planning relationship with an Ameriprise financial advisor can help you find your financial balance and bring your dreams and goals more within reach. </p>
-                        <p>Our Confident Retirement approach to financial planning begins with a one-on-one conversation. At its core is a personal relationship with an advisor dedicated to helping you reach the future you imagine, on your own terms, in a way that is convenient for you.</p>
-                        <p>The financial planning process all starts with learning about you. Your advisor will take the time to:</p>
-                        
-                        <ul class="colored-bullet">
-                            <li>Listen closely to you and learn what you value</li>
-                            <li>Analyze your current financial situation</li>
-                            <li>Understand your feelings about managing money and investments</li>
-                        </ul>
-                        
-                        <p>Then your advisor will offer personalized advice and guidance to help you reach your financial goals. Ameriprise advisors have access to a broad array of solutions to help you plan for your confident future.</p>
-                        <p>And once you have a plan in place, you may feel more confident knowing that your advisor will stay with you over time, helping you track your progress toward your goals and making adjustments along the way when your life or dreams change.</p>
-                        
-                        <div class="second-img-container">
-                            <img class="multi-cultural-staff" src="./images/multi-cultural-staff.svg" alt="multi-cultural-staff">
-                        </div>
-                        
-                        <h4>We’ll help you achieve financial confidence</h4>
-                        <p>Working with a financial advisor may help you come away feeling more confident knowing that you have the support you need to help:</p>
-                        
-                        <ul class="colored-bullet">
-                            <li>Cover your essentials. Essentials are the monthly expenses that keep your life running.</li>
-                            <li>Ensure your lifestyle. Lifestyle is about the things that you want to do, and how you want to live, today and in the future.</li>
-                            <li>Prepare for the unexpected. The unexpected are events that could derail your financial plans.</li>
-                            <li>Leave a legacy. Legacy is about the impact you’ll make on the people, charities and causes that are important to you.</li>
-                        </ul>
-                    </div>
+ <section class="projects-details container">
+        <div class="details-page">
+            <div class="details-main">
+                <div class="top-page-date">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <p class="date-text">@publishedOn</p>
                 </div>
-                <div class="bottom-container">
-                    <form action="post" novalidate >
-                        <h4>Have a question?</h4>
-                        <div class="contact-info">
-                            <input type="text" placeholder="Name">
-                            <input type="email" placeholder="Email">
+                @Model!.Value("bodyText")
+            </div>
+            <div class="side-section">
+                <h4>Recent Projects</h4>
+                @foreach (var item in selection)
+                {
+                    var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                    var pageTitle = item?.Value<string>("pageTitle") ?? "";
+                    var sidepublishedOn = item?.Value<DateTime>("publishedOn").ToString("yyyy-MM-dd");
+
+                    <a href="@item.Url()" class="projects-box">
+                        <img src="@image"/>
+                        <div class="projects-info">
+                            <p style="color: var(--color-primary)">@item.Name()</p>
+                            <div class="date">
+                                <i class="fa-regular fa-calendar-days"></i>
+                                <p class="date-text">@sidepublishedOn</p>
+                            </div>
                         </div>
-                        <textarea name="Qustion" id="" placeholder="Question"></textarea>
-                        <button type="submit" class="btn-primary">Submit</button>
-                    </form>
+                    </a>
+                }
+               
+                <h4>Tags</h4>
+                @foreach (var item in selection)
+                {
+                    var categories = item?.Value<IEnumerable<string>>("categories") ?? null;
+                    <div class="tags">
+                        @foreach (var category in categories)
+                        {
+                            <p class="tag">@category</p>
+                        }
+                    </div>
+                }
+                <div class="about-footer bg-primary">
+                    <h4>How can we help you?</h4>
+                    <p>Online support 24/7, we are here to help you</p>
+                    <div class="input-container">
+                        <input type="email" placeholder="E-mail address">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <img class="mail-img" src="./images/about-us-mail.svg" alt="">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>

@@ -6,7 +6,24 @@
 	Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
     var currentPage = Umbraco.AssignedContentItem;
+    
+    var selection = Umbraco.Content(Guid.Parse("68afe901-8b86-4ac6-a6ab-df5bfaecb952"))
+    .ChildrenOfType("projectItem")
+    .Where(x => x.IsVisible());
 }
+
+
+@{
+
+}
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>
 
 
 

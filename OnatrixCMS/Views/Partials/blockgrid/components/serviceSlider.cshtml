@@ -5,7 +5,8 @@
 @{
 	var selection = Umbraco.Content(Guid.Parse("56e677b2-a923-4c75-9d76-66e7b384db4e"))
     .ChildrenOfType("servicesDetails")
-    .Where(x => x.IsVisible());
+    .Where(x => x.IsVisible())
+    .Take(6);
 }
  <div class="container">
          <div class="section-title">
