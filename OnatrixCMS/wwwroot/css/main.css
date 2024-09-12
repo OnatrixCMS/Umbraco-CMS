@@ -1943,19 +1943,24 @@ h6 {
     }
 }
 
-#partners .umb-block-grid__layout-container .partner-logo {
+#partners .partner-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    max-width: 100%;
+}
+
+#partners .partner-logo .logo img {
+    max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+#partners .partner-logo {
     display: flex;
     flex-direction: row;
     gap: 60px;
+    max-width: 100%;
 }
-
-/* Här börjar partners */
-@media (max-width: 1024px) {
-    #partners .umb-block-grid__layout-container .partner-logo {
-        display: flex;
-        flex-direction: column;
-        gap: 60px;
-    }
 }
 
 
