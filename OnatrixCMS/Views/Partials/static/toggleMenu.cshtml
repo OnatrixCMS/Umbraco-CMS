@@ -1,0 +1,17 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<button onclick="toggleMenu()" class="btn-mobile">
+    <i id="barsIcon" class="fa-regular fa-bars"></i>
+    <i id="crossIcon" class="fa-sharp fa-solid fa-xmark hide"></i>
+</button>
+
+<nav id="menu" class="hide">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+</nav>

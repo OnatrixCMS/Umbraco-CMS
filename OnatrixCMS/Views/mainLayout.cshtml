@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
     <script defer src="/scripts/counter.js"></script>
+    <script defer src="/scripts/scrollToTop.js"></script>
+    <script defer src="/scripts/toggleMenu.js"></script>
     <title>@pageTitle</title>
 
     @if (!string.IsNullOrEmpty(siteFavicon))
@@ -37,7 +39,6 @@
     <div class="wrapper">
         @await Html.PartialAsync("partials/static/topbar.cshtml")
         @await Html.PartialAsync("partials/static/header.cshtml")
-
         @if (!string.IsNullOrEmpty(ViewBag.Title) && currentPage.Name != "Contact" && currentPage.Level > 1)
         {
             @await Html.PartialAsync("partials/Breadcrumbs.cshtml")
@@ -48,7 +49,7 @@
             @await Html.PartialAsync("partials/Breadcrumbs.cshtml")
             @await Html.PartialAsync("partials/static/contactInformation.cshtml")
         }
-
+        <button id="scrollToTopBtn">&#9650;</button>
         <main>
             @RenderBody()
         </main>
@@ -60,6 +61,5 @@
 
         @await Html.PartialAsync("partials/static/footer.cshtml")
     </div>
-    <script src="/scripts/main.js"></script>
 </body>
 </html>
