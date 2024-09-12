@@ -11,7 +11,7 @@
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
 
-    var publishedOn = Model?.Value<DateTime>("publishedOn").ToString("yyyy-MM-dd");
+    var publishedOn = Model?.Value<DateTime>("publishedOn").ToString("MMMM d, yyyy");
     var selection = Umbraco.Content(Guid.Parse("68afe901-8b86-4ac6-a6ab-df5bfaecb952"))
     .ChildrenOfType("projectItem")
     .Where(x => x.IsVisible())
@@ -34,7 +34,7 @@
                 {
                     var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
                     var pageTitle = item?.Value<string>("pageTitle") ?? "";
-                    var sidepublishedOn = item?.Value<DateTime>("publishedOn").ToString("yyyy-MM-dd");
+                    var sidepublishedOn = item?.Value<DateTime>("publishedOn").ToString("MMMM d, yyyy");
 
                     <a href="@item.Url()" class="projects-box">
                         <img src="@thumbnailImage"/>
