@@ -2,21 +2,19 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
+@{
+    var formHeader = Model?.Content.Value<string>("formHeader");
+    var formIngress = Model?.Content.Value<string>("formIngress");
+        
+    var bigForm = Model?.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("bigForm");
+}
+
  <form class="call-back-form">
     <div class="form-header bg-primary">
-        <h3>Request a call back</h3>
+        <h3>@formHeader</h3>
     </div>
     <div class="form-content">
-        <p class="form-ingress">Fill out the form below, and one of our experts will get in touch with you shortly. We’re here to address your needs and provide personalized support to help you achieve your financial goals.</p>
-        <input placeholder="Name"/>
-        <input placeholder="Email Address"/>
-        <input placeholder="Phone"/>
-        <select>
-            <option value="" disabled selected>Choose an option</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-        </select>
-        <button class="btn-accent">Submit</button>
+        <p class="form-ingress">@formIngress</p>
+       @Html.GetBlockListHtml(bigForm)
     </div>
 </form>

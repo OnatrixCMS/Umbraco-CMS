@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var option1 = Model.Content.Value<string>("option1"); 
+    var option2 = Model.Content.Value<string>("option2"); 
+    var option3 = Model.Content.Value<string>("option3"); 
+    var option4 = Model.Content.Value<string>("option4"); 
+
+    var options = new List<string> { option1, option2, option3, option4 };
+}
+
+<div class="dropdown-container">
+    <select id="dropdown" name="dropdown">
+
+        @foreach (var option in options)
+        {
+            @if (!string.IsNullOrEmpty(option))
+            {
+                <option value="@option">@option</option>
+            }
+        }
+    </select>
+</div>
