@@ -4,17 +4,22 @@
 
 @{
     var formHeader = Model?.Content.Value<string>("formHeader");
+    var formSubtitle = Model?.Content.Value<string>("formSubtitle") ?? "";
     var formIngress = Model?.Content.Value<string>("formIngress");
-        
+
     var bigForm = Model?.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("bigForm");
 }
 
- <form class="call-back-form">
+<form class="call-back-form" novalidate>
     <div class="form-header bg-primary">
-        <h3>@formHeader</h3>
+        <h6>@formSubtitle</h6>
+        <h2>@formHeader</h2>
     </div>
     <div class="form-content">
         <p class="form-ingress">@formIngress</p>
-       @Html.GetBlockListHtml(bigForm)
+        @using (Html.BeginUmbracoForm("SubmitForm", "ContactSurface", FormMethod.Post))
+        {
+            @Html.GetBlockListHtml(bigForm)
+        }
     </div>
 </form>

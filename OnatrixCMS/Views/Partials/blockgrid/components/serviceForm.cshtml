@@ -1,0 +1,18 @@
+﻿@using OnatrixCMS.Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+
+@{
+    var formHeader = Model?.Content.Value<string>("formHeader");
+    var formSubtitle = Model?.Content.Value<string>("formSubtitle") ?? "";
+    var formIngress = Model?.Content.Value<string>("formIngress");
+
+    var serviceForm = Model?.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
+}
+
+
+
+        @Html.GetBlockListHtml(serviceForm)
+
