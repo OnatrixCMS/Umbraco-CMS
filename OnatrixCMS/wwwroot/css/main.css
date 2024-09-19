@@ -1350,7 +1350,7 @@ right: 0;
 
 
 
-.form-input-error {
+/*.form-input-error {
     position: absolute;
     color: #d9534f !important;
     font-size: 0.675em;
@@ -1362,7 +1362,7 @@ right: 0;
     z-index: 10;
     top: 23px;
     right: 5px;
-}
+}*/
 
 .services-details .container .bottom-container .umb-block-list {
     display: grid;
@@ -2258,7 +2258,8 @@ margin-top: 10px;
     display: block;
     z-index: 10;
     top: 23px;
-    right: 5px;
+    right: 175px;
+    display: none;
 }
 
 .call-back-form {
@@ -2270,6 +2271,7 @@ margin-top: 10px;
     top: 0; 
     right: -170px;
     padding: 10px;
+    width: 400px;
 }
 
 .form-error-message {

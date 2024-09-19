@@ -21,11 +21,10 @@
 
     <input id="@uniqueName" name="@uniqueName" type="@inputType" value="@inputValue" placeholder="@placeholderText" class="form-input" required="@isRequired">
 
-
-
-    @if ((bool?)ViewData[$"error_{uniqueNameStr}"] == true)
-    {
-        <div class="form-input-error">@errorMessage</div>
-    }
+    <div class="error-container">
+        <div id="error_@uniqueName" class="form-input-error">
+            @errorMessage
+        </div>
+    </div>
 
 </div>

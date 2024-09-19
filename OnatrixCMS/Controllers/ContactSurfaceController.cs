@@ -55,7 +55,7 @@ public class ContactSurfaceController(IUmbracoContextAccessor umbracoContextAcce
                 {
                     name = string.IsNullOrEmpty(form.Name),
                     email = string.IsNullOrEmpty(form.Email),
-                    phone = string.IsNullOrEmpty(form.Phone)
+                    phone = isPhoneRequired && string.IsNullOrEmpty(form.Phone)
                 }
             });
         }

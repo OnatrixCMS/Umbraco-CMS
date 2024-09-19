@@ -26,91 +26,15 @@
         }
 
         <div class="form-success-message" style="display:none;"></div>
+
     </div>
 
-    <div class="error-container">
+@*     <div class="error-container">
         <div id="phone-error" class="form-error-message" style="display:none;"></div>
         <div id="name-error" class="form-error-message" style="display:none;"></div>
         <div id="email-error" class="form-error-message" style="display:none;"></div>
-    </div>
+    </div> *@
 
 </form>
 
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('contact-form');
-        const message = document.querySelector('.form-success-message');
-        const nameError = document.getElementById('name-error');
-        const emailError = document.getElementById('email-error');
-        const phoneError = document.getElementById('phone-error');
-
-        if (!message || !nameError || !emailError || !phoneError) {
-            console.error('Message or error elements not found');
-            return;
-        }
-
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            console.log('Form submission started');
-
-            const formData = new FormData(form);
-
-            try {
-                console.log('Sending form data to server');
-
-                const response = await fetch('ContactSurface/SubmitForm', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                console.log('Response received from server', response);
-
-                const result = await response.json();
-
-                if (result.success) {
-                    console.log('Form submitted successfully');
-
-                    message.style.display = 'block';
-                    message.style.backgroundColor = '#90EE90';
-                    message.textContent = result.message || 'Form submitted successfully!';
-
-                    nameError.style.display = 'none';
-                    emailError.style.display = 'none';
-                    phoneError.style.display = 'none';
-
-                    form.reset();
-                } else {
-                    console.log('FUNKAR EJ!');
-
-                    message.style.display = 'block';
-                    message.textContent = result.error || 'An error occurred. Please check your input!';
-
-                    nameError.style.display = 'none';
-                    emailError.style.display = 'none';
-                    phoneError.style.display = 'none';
-
-                    if (result.errors.name) {
-                        nameError.style.display = 'block';
-                        nameError.textContent = 'Name is required.';
-                    }
-                    if (result.errors.email) {
-                        emailError.style.display = 'block';
-                        emailError.textContent = 'Email is required.';
-                    }
-                    if (result.errors.phone) {
-                        phoneError.style.display = 'block';
-                        phoneError.textContent = 'Phone number is required.';
-                    }
-                }
-            } catch (error) {
-                console.error('Error occurred during form submission', error);
-
-                message.style.display = 'block';
-                message.style.backgroundColor = '#FFCCCB';
-                message.textContent = 'An unexpected error occurred. Please try again later.';
-            }
-        });
-    });
-</script>
+<script src="~/scripts/submitCallbackForm.js"></script>
