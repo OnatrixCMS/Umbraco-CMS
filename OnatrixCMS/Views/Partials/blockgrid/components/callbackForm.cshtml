@@ -11,24 +11,29 @@
 }
 
 <form class="call-back-form" id="contact-form" novalidate>
+
     <div class="form-header bg-primary">
         <h6>@formSubtitle</h6>
         <h2>@formHeader</h2>
     </div>
+
     <div class="form-content">
         <p class="form-ingress">@formIngress</p>
+
         @using (Html.BeginUmbracoForm("SubmitForm", "ContactSurface", FormMethod.Post))
         {
             @Html.GetBlockListHtml(bigForm)
         }
-        <div class="form-success-message" style="display:none;"></div>
 
+        <div class="form-success-message" style="display:none;"></div>
     </div>
+
     <div class="error-container">
         <div id="phone-error" class="form-error-message" style="display:none;"></div>
         <div id="name-error" class="form-error-message" style="display:none;"></div>
         <div id="email-error" class="form-error-message" style="display:none;"></div>
     </div>
+
 </form>
 
 <script>
@@ -63,7 +68,6 @@
                 console.log('Response received from server', response);
 
                 const result = await response.json();
-                console.log('Parsed response JSON', result);
 
                 if (result.success) {
                     console.log('Form submitted successfully');
@@ -78,7 +82,7 @@
 
                     form.reset();
                 } else {
-                    console.log('Form submission failed');
+                    console.log('FUNKAR EJ!');
 
                     message.style.display = 'block';
                     message.textContent = result.error || 'An error occurred. Please check your input!';
