@@ -5,7 +5,7 @@
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
 
-    var serviceForm = Model.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
+    var serviceForm = Model?.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
 }
 
 <section class="services-details bg-light" id="details">

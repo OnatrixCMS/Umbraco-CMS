@@ -10,16 +10,18 @@
     var buttonColorClass = !string.IsNullOrEmpty(buttonColorLabel) && buttonColorLabel != "none" ? $"btn-{buttonColorLabel}" : "";
 }
 
+<div id="_@buttonText" class="form-input-group">
+    <button type="@buttonType" class="@buttonColorClass">@buttonText</button>
+</div>
 
-@if (ViewData["success"] is null)
+
+@* @if (ViewData["success"] is null)
 {
-    <div id="_@buttonText" class="form-input-group">
-        <button type="@buttonType" class="@buttonColorClass">@buttonText</button>
-    </div>
+
 }
 else
 {
-    <div class="form-success-message">
+    <div class="form-success-message" style="display:none;">
         @ViewData["success"]
     </div>
-}
+} *@

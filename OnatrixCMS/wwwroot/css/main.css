@@ -2261,7 +2261,43 @@ margin-top: 10px;
     right: 5px;
 }
 
-.form-content .form-success-message {
+.call-back-form {
+    position: relative;
+}
+
+.error-container {
+    position: absolute;
+    top: 0; 
+    right: -170px;
+    padding: 10px;
+}
+
+.form-error-message {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid red;
+    background-color: #fdd;
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+}
+
+.form-success-message {
+    color: green;
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: #e0f7e0;
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+}
+
+/*.form-content .form-success-message {
+    position: absolute;
     color: green;
     font-size: 14px;
     margin: 10px 0;
@@ -2274,6 +2310,21 @@ margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
 }
+
+.form-error-message {
+    position: absolute;
+    top: 203px;
+    right: -160px;
+    color: red;
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid red;
+    background-color: #fdd;
+    border-radius: 4px;
+    text-align: center;
+    z-index: 9999;
+}*/
 
 
 @media (max-width: 768px) {
