@@ -1,24 +1,27 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('contact-form');
-    const message = document.querySelector('.form-success-message');
+
+    const serviceForm = document.getElementById('serviceForm');
+    console.log('Service Form:', serviceForm);
+
+    const message = document.querySelector('.serviceForm-success-message');
 
     const nameError = document.getElementById('error_Name');
     const emailError = document.getElementById('error_Email');
-    const phoneError = document.getElementById('error_Phone');
+    const questionError = document.getElementById('error_Question');
 
-    console.log(nameError, emailError, phoneError);
+    console.log(nameError, emailError, questionError);
 
-    form.addEventListener('submit', async function (e) {
+    serviceForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         console.log('Form submitted');
 
-        const formData = new FormData(form);
+        const formData = new FormData(serviceForm);
 
         try {
             console.log('Sending form data to server');
 
-            const response = await fetch('ContactSurface/SubmitForm', {
+            const response = await fetch('ContactSurface/SubmitServiceForm', {
                 method: 'POST',
                 body: formData
             });
@@ -27,7 +30,7 @@
 
             const result = await response.json();
 
-            // Tar bort gamla meddelanden
+            // Removes old messages
             message.style.display = 'none';
             clearAllErrors();
 
@@ -35,16 +38,21 @@
                 console.log('Form submitted successfully');
 
                 message.style.display = 'block';
-                message.style.backgroundColor = '#90EE90';
+                message.style.backgroundColor = '#d4edda';
+                message.style.color = '#155724';
+                message.style.borderColor = '#c3e6cb';
                 message.textContent = result.message || 'Form submitted successfully!';
-                form.reset();
+                serviceForm.reset(); 
             } else {
                 console.log('Form submission failed with validation errors.');
 
                 message.style.display = 'block';
+                message.style.backgroundColor = '#f8d7da'; 
+                message.style.color = '#721c24'; 
+                message.style.borderColor = '#721c24';
                 message.textContent = result.error || 'An error occurred. Please check your input!';
 
-                // Function som dynamiskt visar errors
+                // Funtion to dynamically display error messages.
                 displayErrors(result.errors);
             }
         } catch (error) {
@@ -56,40 +64,33 @@
         }
     });
 
-    // Function som döljer meddelande.
+    // Function that hides messages
     function clearAllErrors() {
         const errorElements = document.querySelectorAll('.form-input-error');
         errorElements.forEach(el => {
             el.style.display = 'none';
-
         });
     }
 
-    // Function som hämtar och visar de dynamiska meddelandena från blocklisten
+    // Display messages depending on response from server. 
     function displayErrors(errors) {
         console.log('Displaying errors:', errors);
 
         for (let field in errors) {
             if (errors[field]) {
-                // Bygger upp ID:t baserat på fältets namn, sätter stor bokstav på första.
-                const fieldId = `error_${capitalizeFirstLetter(field)}`;
-                console.log(`Looking for error element with ID: ${fieldId}`);
-
-                const errorElement = document.getElementById(fieldId);
-
+                const errorElement = document.getElementById(`error_${capitalizeFirstLetter(field)}`);
                 if (errorElement) {
-                    const errorMessage = errorElement.textContent.trim(); // Använder textContect för att komma åt innehållet i diven
+                    const errorMessage = errorElement.textContent.trim();
 
                     errorElement.style.display = 'block';
-                    errorElement.textContent = errorMessage; 
-                } else {
-                    console.error(`Error element not found for field: ${field}`);
+                    errorElement.textContent = errorMessage;
                 }
             }
         }
     }
 
-    // Ser till att första bokstaven är stor.
+
+    // Function to apitalize first letter. 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }

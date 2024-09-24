@@ -4,6 +4,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\scripts\submitServiceForm.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\scripts\submitServiceForm.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\scripts\submitServiceForm.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Communication.Email" Version="1.0.1" />

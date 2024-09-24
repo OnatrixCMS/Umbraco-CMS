@@ -1,63 +1,42 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
 @{
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
 
-    var serviceForm = Model?.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var serviceForm = settings?.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
 }
 
 <section class="services-details bg-light" id="details">
     <div class="container">
         <div class="top-container">
-            <div class="about-us">
-                <h4>About us</h4>
-                <img src="" alt="staff meeting">
-                <p class="ingress">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non </p>
-                <div class="about-footer bg-primary">
-                    <h4>How can we help you?</h4>
-                    <p>Online support 24/7, we are here to help you</p>
-                    <div class="input-container">
-                        <input type="email" placeholder="E-mail address">
-                        <i class="fa-regular fa-envelope"></i>
-                    </div>
-                    <img class="mail-img" src="./images/about-us-mail.svg" alt="">
-                </div>
-            </div>
 
+            @using (Html.BeginUmbracoForm("SubmitSmallForm", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
+            {
+                @await Html.PartialAsync("partials/static/smallForm.cshtml")
+            }
             <div class="main-content">
                 @Model?.Value("mainContent")
             </div>
         </div>
         <div id="form-section" class="bottom-container">
             <h4>Have a question?</h4>
-            @using (Html.BeginUmbracoForm("SubmitServiceForm", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
-            {
-                @Html.GetBlockListHtml(serviceForm)
-            }
+            <form id="serviceForm" novalidate>
+                @using (Html.BeginUmbracoForm("SubmitServiceForm", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
+                {
+                    @Html.GetBlockListHtml(serviceForm)
+                }
+            </form>
+            <div class="serviceForm-success-message" style="display:none;">Testar</div>
         </div>
-    </div> 
+    </div>
 </section>
 
+<script src="~/scripts/submitServiceForm.js"></script>
 
-<script>
-    // Lägg till en eventlyssnare på formuläret
-    document.querySelector('form').addEventListener('submit', function () {
-        // Sätt cookie innan formuläret skickas
-        document.cookie = "scrollToSection=true; path=/";
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Kontrollera om vi har en cookie som indikerar att vi ska scrolla till sektionen
-        if (document.cookie.includes('scrollToSection=true')) {
-            document.getElementById('form-section').scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
-
-            // Ta bort cookie efter användning
-            document.cookie = "scrollToSection=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        }
-    });
-</script>

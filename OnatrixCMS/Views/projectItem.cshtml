@@ -11,12 +11,21 @@
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model?.Value("pageTitle") ?? null;
 
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
     var publishedOn = Model?.Value<DateTime>("publishedOn").ToString("MMMM d, yyyy");
     var selection = Umbraco.Content(Guid.Parse("68afe901-8b86-4ac6-a6ab-df5bfaecb952"))
     .ChildrenOfType("projectItem")
     .Where(x => x.IsVisible())
     .OrderByDescending(x => x.CreateDate)
     .Take(4);
+
+    var formBackgroundImage = settings?.Value<IPublishedContent>("formBackgroundImage")?.Url() ?? "";
+
+    var formHeadline = settings?.Value<string>("formHeadline") ?? "";
+    var formSubtitle = settings?.Value<string>("formSubtitle") ?? "";
+    var errorMessage = settings?.Value<string>("errorMessage") ?? "";
 }
 
  <section class="projects-details container">
@@ -60,15 +69,29 @@
                     }
                 </div>
 
-                <div class="about-footer bg-primary">
-                    <h4>How can we help you?</h4>
-                    <p>Online support 24/7, we are here to help you</p>
-                    <div class="input-container">
-                        <input type="email" placeholder="E-mail address">
+            @using (Html.BeginUmbracoForm("SubmitSmallForm", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
+            {
+            <div class="about-footer bg-primary">
+                <h4>@formHeadline</h4>
+                <p>@formSubtitle</p>
+                <div class="input-container">
+                    <input type="email" name="Email" placeholder="E-mail address">
+
+                        <div class="error-container">
+                            <div id="" class="form-input-error" style="display:none;">@errorMessage</div>
+                        </div>
+
+                        <div class="form-success-message" style="display:none;"></div>
+
+                     <button type="submit" class="envelope-submit">
                         <i class="fa-regular fa-envelope"></i>
-                    </div>
-                    <img class="mail-img" src="./images/about-us-mail.svg" alt="">
+                    </button>
                 </div>
+                <img class="mail-img" src="@formBackgroundImage" alt="@formBackgroundImage">
+            </div>
+            }
             </div>
         </div>
     </section>
+
+    <script src="~/scripts/submitSmallForm.js"></script>

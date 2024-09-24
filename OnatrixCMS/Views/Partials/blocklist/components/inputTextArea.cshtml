@@ -18,9 +18,10 @@
 <div id="_@uniqueName" class="form-input-group">
     <textarea id="@uniqueName" name="@uniqueName" type="@inputType" placeholder="@placeholderText" value="@inputValue" class="form-textarea" required="@isRequired"></textarea>
 
-    @if ((bool?)ViewData[$"error_{uniqueNameStr}"] == true)
-    {
-        <div class="form-input-error">@errorMessage</div>
-    }
+        <div class="error-container">
+        <div id="error_@uniqueName" class="form-input-error">
+            @errorMessage
+        </div>
+    </div>
 
 </div>

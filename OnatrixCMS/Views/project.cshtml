@@ -17,6 +17,12 @@
 
     var totalItems = selection?.Count() ?? 0;
     var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+
+    var formBackgroundImage = Model?.Value<IPublishedContent>("formBackgroundImage")?.Url() ?? "";
+
+    var formHeadline = Model?.Value<string>("formHeadline") ?? "";
+    var formSubtitle = Model?.Value<string>("formSubtitle") ?? "";
+    var errorMessage = Model?.Value<string>("errorMessage") ?? "";
 }
 
 
@@ -61,14 +67,27 @@
                 <p class="tag">Finance</p>
                 <p class="tag">Pricing</p>
             </div>
+
             <div class="about-footer bg-primary">
-                <h4>How can we help you?</h4>
-                <p>Online support 24/7, we are here to help you</p>
+            @using (Html.BeginUmbracoForm("SubmitSmallForm", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
+            {
+                <h4>@formHeadline</h4>
+                <p>@formSubtitle</p>
                 <div class="input-container">
-                    <input type="email" placeholder="E-mail address">
-                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" name="Email" placeholder="E-mail address">
+
+                        <div class="error-container">
+                            <div id="" class="form-input-error" style="display:none;">@errorMessage</div>
+                        </div>
+
+                        <div class="form-success-message" style="display:none;"></div>
+
+                     <button type="submit" class="envelope-submit">
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
                 </div>
-                <img class="mail-img" src="./images/about-us-mail.svg" alt="">
+                <img class="mail-img" src="@formBackgroundImage" alt="@formBackgroundImage">
+            }
             </div>
         </div>
     </div>
@@ -104,3 +123,5 @@
     </section>
 
 </section>
+
+<script src="~/scripts/submitSmallForm.js"></script>

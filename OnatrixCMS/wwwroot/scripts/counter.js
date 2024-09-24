@@ -23,14 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         currentValue += increment;
                         if (currentValue > targetValue) currentValue = targetValue;
                         
-                        // Behåll kommatecken i rätt position
+                        // Ser till att komma stannar i rätt läge
                         const formattedValue = currentValue.toLocaleString('en-US');
-                        // Lägg till formateringsdelarna (som +) efter det numeriska värdet
+                        // Lägger till + efter siffrorna
                         target.innerText = formattedValue + formatPart;
 
                         setTimeout(updateCounter, 20);
                     } else {
-                        // När uppräkningen är klar, sätt det slutliga värdet
+                        // När uppräkningen är klar, sätter det slutliga värdet
                         const finalValue = targetValue.toLocaleString('en-US');
                         target.innerText = finalValue + formatPart;
                     }

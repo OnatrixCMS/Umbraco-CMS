@@ -1,0 +1,43 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var formImage = settings?.Value<IPublishedContent>("formImage")?.Url() ?? "";
+    var formBackgroundImage = settings?.Value<IPublishedContent>("formBackgroundImage")?.Url() ?? "";
+
+    var formTitle = settings?.Value<string>("formTitle") ?? "";
+    var formIngress = settings?.Value<string>("formIngress") ?? "";
+    var formHeadline = settings?.Value<string>("formHeadline") ?? "";
+    var formSubtitle = settings?.Value<string>("formSubtitle") ?? "";
+}
+
+<div class="about-us">
+    <h4>@formTitle</h4>
+    <img src="@formImage" alt="staff meeting">
+    <p class="ingress">@formIngress</p>
+    <div class="about-footer bg-primary">
+        <h4>@formHeadline</h4>
+        <p>@formSubtitle</p>
+        <div class="input-container">
+
+            <input type="email" name="Email" placeholder="E-mail address">
+
+            <div class="error-container">
+                <div id="" class="form-input-error" style="display: none;"></div>
+            </div>
+
+            <div class="form-success-message" style="display:none;"></div>
+
+            <button type="submit" class="envelope-submit">
+                <i class="fa-regular fa-envelope"></i>
+            </button>
+
+        </div>
+        <img class="mail-img" src="@formBackgroundImage" alt="">
+    </div>
+</div>
+
+<script src="~/scripts/submitSmallForm.js"></script>

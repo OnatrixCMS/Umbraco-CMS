@@ -2,17 +2,20 @@
 @using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 
 
 @{
-    var formHeader = Model?.Content.Value<string>("formHeader");
-    var formSubtitle = Model?.Content.Value<string>("formSubtitle") ?? "";
-    var formIngress = Model?.Content.Value<string>("formIngress");
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var formHeader = settings?.Value<string>("formHeader");
+    var formSubtitle = settings?.Value<string>("formSubtitle") ?? "";
+    var formIngress = settings?.Value<string>("formIngress");
 
     var serviceForm = Model?.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockListModel>("serviceForm");
 }
 
 
-
-        @Html.GetBlockListHtml(serviceForm)
+    @Html.GetBlockListHtml(serviceForm)
 
